@@ -23,7 +23,7 @@ class HeaderView : ConstraintLayout {
             }
         }
 
-    private var centerTitleText: String? = null
+    var centerTitleText: String? = null
         set(value) {
             field = value
             field?.let {
@@ -33,6 +33,10 @@ class HeaderView : ConstraintLayout {
                 binding.tvHeaderTitle.visibility = GONE
             }
         }
+
+    fun onLeftIconClicked(onClick: () -> Unit) {
+        binding.ivHeaderLeftIcon.setOnClickListener { onClick() }
+    }
 
     constructor(context: Context) : super(context) {
         initialize()

@@ -31,14 +31,16 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/navigation_splash"
-            app:popUpToInclusive="true" />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_post_detail"
         android:name="com.sk.postsapp.ui.postdetail.PostDetailFragment"
         android:label="PostDetail"
-        tools:layout="@layout/fragment_post_detail" />
+        tools:layout="@layout/fragment_post_detail">
+        <argument
+            android:name="postItem"
+            app:argType="com.sk.postsapp.domain.model.PostItem" />
+    </fragment>
 </navigation>

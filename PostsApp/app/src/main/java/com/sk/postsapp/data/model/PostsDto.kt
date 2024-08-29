@@ -20,6 +20,7 @@ data class PostsDtoItem(
     override fun serialize(): PostItem {
         return PostItem(
             id = id,
+            userId = userId,
             title = title,
             body = body,
             image = buildString {

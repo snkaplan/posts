@@ -2,7 +2,6 @@ package com.sk.postsapp.ui.posts
 
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,12 +16,13 @@ import com.sk.postsapp.ui.LoadingDialogViewModel
 import com.sk.postsapp.ui.components.SwipeToDelete
 import com.sk.postsapp.ui.posts.adapter.PostsAdapter
 import com.sk.postsapp.ui.posts.adapter.PostsListener
+import com.sk.postsapp.ui.utils.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragment_posts), PostsListener {
-    private val viewModel by viewModels<PostsViewModel>()
+    private val viewModel by activityViewModels<PostsViewModel>()
     private val loadingViewModel: LoadingDialogViewModel by activityViewModels()
     private val adapter by lazy { PostsAdapter(this) }
 
@@ -87,6 +87,6 @@ class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragme
     }
 
     override fun onPostClicked(data: PostItem) {
-        findNavController().navigate(PostsFragmentDirections.actionNavigationPostsToNavigationPostDetail())
+        findNavController().navigateSafe(PostsFragmentDirections.actionNavigationPostsToNavigationPostDetail(data))
     }
 }

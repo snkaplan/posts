@@ -8,4 +8,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok">OK</string>
+    <string name="post_updated">Post Updated!</string>
+    <string name="post_update_failed">Post Update Failed!</string>
+    <string name="update">Update</string>
+    <string name="body">Body</string>
+    <string name="title">Title</string>
 </resources>

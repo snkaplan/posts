@@ -8,6 +8,8 @@ import com.sk.postsapp.base.Resource
 import com.sk.postsapp.base.UIEvent
 import com.sk.postsapp.base.createUiEvent
 import com.sk.postsapp.common.getFriendlyMessage
+import com.sk.postsapp.common.updated
+import com.sk.postsapp.domain.model.PostItem
 import com.sk.postsapp.domain.model.PostsResult
 import com.sk.postsapp.domain.usecase.DeletePostUseCase
 import com.sk.postsapp.domain.usecase.GetPostsUseCase
@@ -80,6 +82,17 @@ class PostsViewModel @Inject constructor(
                         }
                     }
                 }.launchIn(this)
+            }
+        }
+    }
+
+    fun onPostUpdated(postItem: PostItem) {
+        val posts = currentState.postResult?.posts
+        posts?.let { safePosts ->
+            val idx = safePosts.indexOfFirst { it.id == postItem.id }
+            if (idx != -1) {
+                val newList = safePosts.updated(idx, postItem)
+                updateState { copy(postResult = postResult?.copy(posts = newList)) }
             }
         }
     }

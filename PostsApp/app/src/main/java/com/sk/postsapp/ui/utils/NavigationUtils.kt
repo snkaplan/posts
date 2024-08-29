@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 
-fun NavController.navigateSafe(directions: NavDirections, navOptions: NavOptions?) {
+fun NavController.navigateSafe(directions: NavDirections, navOptions: NavOptions? = null) {
     currentDestination?.let { safeCurrentDestination ->
         val action = safeCurrentDestination.getAction(directions.actionId) ?: graph.getAction(directions.actionId)
         if (action != null) {
