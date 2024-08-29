@@ -1,6 +1,7 @@
 package com.sk.postsapp.ui.posts
 
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import com.sk.postsapp.R
 import com.sk.postsapp.base.A101PlusBaseFragment
 import com.sk.postsapp.databinding.FragmentPostsBinding
 import com.sk.postsapp.domain.model.PostItem
+import com.sk.postsapp.ui.LoadingDialogViewModel
 import com.sk.postsapp.ui.components.SwipeToDelete
 import com.sk.postsapp.ui.posts.adapter.PostsAdapter
 import com.sk.postsapp.ui.posts.adapter.PostsListener
@@ -21,6 +23,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragment_posts), PostsListener {
     private val viewModel by viewModels<PostsViewModel>()
+    private val loadingViewModel: LoadingDialogViewModel by activityViewModels()
     private val adapter by lazy { PostsAdapter(this) }
 
     override fun bindScreen() {
@@ -41,11 +44,12 @@ class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragme
                 }
                 val swipeHandler = SwipeToDelete(safeDataBinding.root.context) { position ->
                     AlertDialog.Builder(safeDataBinding.root.context)
-                        .setMessage("Are you sure?")
-                        .setPositiveButton("Yes") { dialog, id ->
+                        .setTitle(context.getString(R.string.are_you_sure))
+                        .setMessage(context.getString(R.string.are_you_sure_warning))
+                        .setPositiveButton(context.getString(R.string.yes)) { _, _ ->
                             viewModel.deletePostByPosition(position)
                         }
-                        .setNegativeButton("No") { dialog, id ->
+                        .setNegativeButton(context.getString(R.string.no)) { _, _ ->
                             this@PostsFragment.adapter.notifyItemChanged(position)
                         }
                         .create()
@@ -61,12 +65,21 @@ class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragme
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.uiState.collect { state ->
-                    dataBinding?.isLoading = state.loading
+                    dataBinding?.isLoading = state.loading && state.postResult == null
                     state.friendlyMessage?.let {
-                        // Show dialog for error
+                        handleError(it)
                     }
                     state.postResult?.let {
                         adapter.submitList(it.posts)
+                        if (state.loading) {
+                            loadingViewModel.show()
+                        } else {
+                            loadingViewModel.hide()
+                        }
+                    }
+                    state.deletePostFailedEvent?.let { safeDeleteFailEvent ->
+                        this@PostsFragment.adapter.notifyItemChanged(safeDeleteFailEvent.data)
+                        safeDeleteFailEvent.onConsumed()
                     }
                 }
             }

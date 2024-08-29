@@ -8,4 +8,8 @@ class PostRepositoryImpl @Inject constructor(private val postRemoteDataSource: P
     override suspend fun getPosts(): Result<PostsDto> {
         return postRemoteDataSource.getPosts()
     }
+
+    override suspend fun deletePost(id: Int): Result<Unit> {
+        return postRemoteDataSource.deletePost(id)
+    }
 }

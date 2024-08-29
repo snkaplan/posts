@@ -12,7 +12,7 @@ class HeaderView : ConstraintLayout {
 
     private lateinit var binding: ViewHeaderBinding
 
-    var leftIconRes: Drawable? = null
+    private var leftIconRes: Drawable? = null
         set(value) {
             field = value
             field?.let {
@@ -23,7 +23,7 @@ class HeaderView : ConstraintLayout {
             }
         }
 
-    var centerTitleText: String? = null
+    private var centerTitleText: String? = null
         set(value) {
             field = value
             field?.let {

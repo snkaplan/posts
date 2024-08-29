@@ -11,4 +11,10 @@ class PostRemoteDataSourceImpl @Inject constructor(private val postService: Post
             postService.getPosts()
         }
     }
+
+    override suspend fun deletePost(id: Int): Result<Unit> {
+        return handleApi {
+            postService.deletePost(id)
+        }
+    }
 }

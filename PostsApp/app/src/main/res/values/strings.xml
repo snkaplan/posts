@@ -3,4 +3,9 @@
     <string name="error">Error</string>
     <string name="general_error_desc">An error occurred</string>
     <string name="posts">Posts</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="are_you_sure_warning">This operation can not be undone!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
 </resources>
