@@ -37,6 +37,7 @@ class PostDetailFragment : A101PlusBaseFragment<FragmentPostDetailBinding>(R.lay
                 viewModel.updatePost()
             }
             hvPostDetail.onLeftIconClicked { findNavController().navigateUp() }
+            ivPostDetailImage.clipToOutline = true
         }
         listeners()
     }
@@ -55,8 +56,6 @@ class PostDetailFragment : A101PlusBaseFragment<FragmentPostDetailBinding>(R.lay
                             title = state.title
                             body = state.body
                             buttonEnabled = safePostItem.title != state.title || safePostItem.body != state.body
-                            println("Testttt ${safePostItem.title} aanddd ${state.title}")
-                            println("Testttt ${safePostItem.body} aanddd ${state.body}")
                         }
                         if (state.loading) {
                             loadingViewModel.show()
