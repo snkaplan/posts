@@ -51,7 +51,12 @@ class PostDetailFragment : A101PlusBaseFragment<FragmentPostDetailBinding>(R.lay
                     state.postItem?.let { safePostItem ->
                         dataBinding?.apply {
                             hvPostDetail.centerTitleText = safePostItem.title
-                            data = safePostItem
+                            imageUrl = safePostItem.image
+                            title = state.title
+                            body = state.body
+                            buttonEnabled = safePostItem.title != state.title || safePostItem.body != state.body
+                            println("Testttt ${safePostItem.title} aanddd ${state.title}")
+                            println("Testttt ${safePostItem.body} aanddd ${state.body}")
                         }
                         if (state.loading) {
                             loadingViewModel.show()

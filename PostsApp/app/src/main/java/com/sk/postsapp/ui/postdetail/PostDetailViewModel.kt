@@ -25,7 +25,7 @@ class PostDetailViewModel @Inject constructor(
 
     fun init(postItem: PostItem) {
         if (currentState.postItem == null) {
-            updateState { copy(postItem = postItem) }
+            updateState { copy(postItem = postItem, title = postItem.title, body = postItem.body) }
         }
     }
 
@@ -36,8 +36,8 @@ class PostDetailViewModel @Inject constructor(
                     UpdatePostUseCaseParams(
                         safePost.id,
                         safePost.userId,
-                        safePost.title,
-                        safePost.body
+                        currentState.title.orEmpty(),
+                        currentState.body.orEmpty()
                     )
                 ).onEach {
                     when (it) {
@@ -76,11 +76,11 @@ class PostDetailViewModel @Inject constructor(
     }
 
     fun onPostTitleChanged(title: String) {
-        updateState { copy(postItem = postItem?.copy(title = title)) }
+        updateState { copy(title = title) }
     }
 
     fun onPostBodyChanged(body: String) {
-        updateState { copy(postItem = postItem?.copy(body = body)) }
+        updateState { copy(body = body) }
     }
 }
 
@@ -90,4 +90,6 @@ data class PostDetailUIState(
     val updatePostSuccessEvent: UIEvent<Unit>? = null,
     val updatePostFailEvent: UIEvent<Unit>? = null,
     val friendlyMessage: FriendlyMessage? = null,
+    val title: String? = null,
+    val body: String? = null,
 ) : UIState

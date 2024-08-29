@@ -6,8 +6,20 @@
     <data>
 
         <variable
-            name="data"
-            type="com.sk.postsapp.domain.model.PostItem" />
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="body"
+            type="String" />
+
+        <variable
+            name="buttonEnabled"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +34,7 @@
             android:background="@drawable/bg_bordered_gray_with_bottom_radius_10dp"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
-            app:imageUrl="@{data.image}"
+            app:imageUrl="@{imageUrl}"
             app:layout_constraintDimensionRatio="8:3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hv_post_detail"
@@ -60,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:inputType="text|textMultiLine"
-                    android:text="@{data.title}"
+                    android:text="@{title}"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_14"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -92,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:inputType="text|textMultiLine"
-                    android:text="@{data.body}"
+                    android:text="@{body}"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_14"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -107,8 +119,10 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_20"
             android:layout_marginBottom="@dimen/dimen_20"
-            android:background="@drawable/bg_light_blue_with_radius_10dp"
+            android:background="@drawable/btn_selector_light_blue_to_ghost_white"
+            android:enabled="@{buttonEnabled}"
             android:text="@string/update"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <com.sk.postsapp.ui.components.HeaderView
