@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.sk.postsapp.R
-import com.sk.postsapp.base.A101PlusBaseFragment
+import com.sk.postsapp.base.BaseFragment
 import com.sk.postsapp.databinding.FragmentPostsBinding
 import com.sk.postsapp.domain.model.PostItem
 import com.sk.postsapp.ui.LoadingDialogViewModel
@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PostsFragment : A101PlusBaseFragment<FragmentPostsBinding>(R.layout.fragment_posts), PostsListener {
+class PostsFragment : BaseFragment<FragmentPostsBinding>(R.layout.fragment_posts), PostsListener {
     private val viewModel by activityViewModels<PostsViewModel>()
     private val loadingViewModel: LoadingDialogViewModel by activityViewModels()
     private val adapter by lazy { PostsAdapter(this) }

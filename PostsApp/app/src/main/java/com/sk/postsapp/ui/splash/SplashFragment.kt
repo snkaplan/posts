@@ -6,12 +6,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.sk.postsapp.R
-import com.sk.postsapp.base.A101PlusBaseFragment
+import com.sk.postsapp.base.BaseFragment
 import com.sk.postsapp.databinding.FragmentSplashBinding
 import com.sk.postsapp.ui.utils.navigateSafe
 import kotlinx.coroutines.launch
 
-class SplashFragment : A101PlusBaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
     private val viewModel by viewModels<SplashViewModel>()
     override fun bindScreen() {
         super.bindScreen()

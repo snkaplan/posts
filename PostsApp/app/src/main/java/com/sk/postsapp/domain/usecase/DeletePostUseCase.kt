@@ -11,8 +11,8 @@ import javax.inject.Inject
 class DeletePostUseCase @Inject constructor(
     private val postRepository: PostRepository,
 ) : UseCase<Int, Flow<Resource<Unit>>> {
-    override suspend operator fun invoke(params: Int): Flow<Resource<Unit>> = flow {
-        val result = postRepository.deletePost(params)
+    override suspend operator fun invoke(param: Int): Flow<Resource<Unit>> = flow {
+        val result = postRepository.deletePost(param)
         emit(result.getOrThrow())
     }.asResource()
 }

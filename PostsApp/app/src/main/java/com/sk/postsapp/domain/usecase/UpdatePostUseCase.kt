@@ -12,8 +12,8 @@ import javax.inject.Inject
 class UpdatePostUseCase @Inject constructor(
     private val postRepository: PostRepository,
 ) : UseCase<UpdatePostUseCaseParams, Flow<Resource<PostItem>>> {
-    override suspend operator fun invoke(params: UpdatePostUseCaseParams): Flow<Resource<PostItem>> = flow {
-        val result = postRepository.updatePost(params.id, params.userId, params.title, params.body)
+    override suspend operator fun invoke(param: UpdatePostUseCaseParams): Flow<Resource<PostItem>> = flow {
+        val result = postRepository.updatePost(param.id, param.userId, param.title, param.body)
         emit(result.getOrThrow().serialize())
     }.asResource()
 }

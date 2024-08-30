@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetPostsUseCase @Inject constructor(
     private val postRepository: PostRepository,
 ) : UseCase<Unit, Flow<Resource<PostsResult>>> {
-    override suspend operator fun invoke(params: Unit): Flow<Resource<PostsResult>> = flow {
+    override suspend operator fun invoke(param: Unit): Flow<Resource<PostsResult>> = flow {
         val result = postRepository.getPosts()
         emit(result.getOrThrow().serialize())
     }.asResource()

@@ -12,7 +12,7 @@ import com.sk.postsapp.R
 import com.sk.postsapp.common.FriendlyMessage
 import com.sk.postsapp.ui.utils.DialogUtils
 
-abstract class A101PlusBaseFragment<T : ViewDataBinding>(private var layoutId: Int) : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding>(private var layoutId: Int) : Fragment() {
 
     protected var dataBinding: T? = null
     private var errorDialog: AlertDialog? = null

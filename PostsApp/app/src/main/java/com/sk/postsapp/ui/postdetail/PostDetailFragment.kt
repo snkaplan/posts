@@ -10,7 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sk.postsapp.R
-import com.sk.postsapp.base.A101PlusBaseFragment
+import com.sk.postsapp.base.BaseFragment
 import com.sk.postsapp.databinding.FragmentPostDetailBinding
 import com.sk.postsapp.ui.LoadingDialogViewModel
 import com.sk.postsapp.ui.posts.PostsViewModel
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PostDetailFragment : A101PlusBaseFragment<FragmentPostDetailBinding>(R.layout.fragment_post_detail) {
+class PostDetailFragment : BaseFragment<FragmentPostDetailBinding>(R.layout.fragment_post_detail) {
     private val viewModel by viewModels<PostDetailViewModel>()
     private val postsViewModel by activityViewModels<PostsViewModel>()
     private val loadingViewModel: LoadingDialogViewModel by activityViewModels()
@@ -86,5 +86,4 @@ class PostDetailFragment : A101PlusBaseFragment<FragmentPostDetailBinding>(R.lay
             }
         }
     }
-
 }
