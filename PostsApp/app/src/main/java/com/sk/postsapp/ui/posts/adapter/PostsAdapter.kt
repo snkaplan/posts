@@ -9,7 +9,7 @@ import com.sk.postsapp.databinding.ItemPostBinding
 import com.sk.postsapp.domain.model.PostItem
 
 class PostsAdapter(private val listener: PostsListener) :
-    ListAdapter<PostItem, PostsAdapter.PostItemHolder>(PostsDiffUtil) {
+    ListAdapter<PostItem, PostsAdapter.PostItemViewHolder>(PostsDiffUtil) {
     private lateinit var layoutInflater: LayoutInflater
 
     object PostsDiffUtil : DiffUtil.ItemCallback<PostItem>() {
@@ -28,7 +28,7 @@ class PostsAdapter(private val listener: PostsListener) :
         }
     }
 
-    inner class PostItemHolder(private val binding: ItemPostBinding) :
+    inner class PostItemViewHolder(private val binding: ItemPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(postItem: PostItem) {
             with(binding) {
@@ -41,11 +41,11 @@ class PostsAdapter(private val listener: PostsListener) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsAdapter.PostItemHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsAdapter.PostItemViewHolder {
         if (!::layoutInflater.isInitialized) {
             layoutInflater = LayoutInflater.from(parent.context)
         }
-        return PostItemHolder(
+        return PostItemViewHolder(
             ItemPostBinding.inflate(
                 layoutInflater,
                 parent,
@@ -54,7 +54,7 @@ class PostsAdapter(private val listener: PostsListener) :
         )
     }
 
-    override fun onBindViewHolder(holder: PostsAdapter.PostItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostsAdapter.PostItemViewHolder, position: Int) {
         currentList[position]?.let { holder.bind(it) }
     }
 }

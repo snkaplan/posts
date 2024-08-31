@@ -1,5 +1,6 @@
 package com.sk.postsapp.ui.splash
 
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
     private val viewModel by viewModels<SplashViewModel>()
     override fun bindScreen() {
         super.bindScreen()
+        dataBinding?.ivSplashLogo?.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.pulse))
         listeners()
     }
 

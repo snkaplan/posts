@@ -16,7 +16,7 @@ class SplashViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            delay(500)
+            delay(1000)
             updateState { copy(navigateToPosts = true) }
         }
     }
